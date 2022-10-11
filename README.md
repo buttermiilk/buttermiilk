@@ -8,7 +8,7 @@
 buttermiilk_kitty@github
 -------------------------
 OS: Android "Q" 10
-Shell: Termux 0.118.0 (118)
+Shell: Termux 0.118 (118)
 Pronouns: They/Them
 Location: Asia, Earth
 Frameworks: Express.js
