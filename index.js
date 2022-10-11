@@ -21,7 +21,7 @@ async function grabDataFromAllRepositories() {
   };
 
   // https://docs.github.com/en/rest/reference/repos#list-repositories-for-the-authenticated-user
-  const request = await octokit.rest.repos.listForAuthenticatedUser(options);
+  const request = await octokit.request('GET /user/repos', options);
   return request.data;
 }
 
