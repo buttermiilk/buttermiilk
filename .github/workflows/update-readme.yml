@@ -1,6 +1,14 @@
 name: Build README
 
 on:
+  workflow_dispatch:
+    inputs:
+      logLevel:
+        description: 'e'     
+        required: true
+        default: 'warning'
+      tags:
+        description: 'Test stuff'
   push:
     branches:
       - master
