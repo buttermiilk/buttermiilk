@@ -1,6 +1,6 @@
 {
   "name": "Buttermiilk",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "A profile README that kind of looks like a neofetch. Credits to AnOrdinaryUsername.",
   "main": "index.js",
   "scripts": {
