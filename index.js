@@ -64,9 +64,7 @@ async function main() {
   lastYear.setFullYear(lastYear.getFullYear() - 1);
   const totalCommitsInPastYear = repoData.totalCommits;
 
-  // Hex color codes for the color blocks
-  const colors = ["474342", "fbedf6", "c9594d", "f8b9b2", "ae9c9d"];
-  await updateReadme({ totalStars, totalCommitsInPastYear, colors });
+  await updateReadme({ totalStars, totalCommitsInPastYear });
 }
 
 main();
