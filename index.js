@@ -1,7 +1,10 @@
 require("dotenv").config();
 const Mustache = require("mustache");
 const fs = require("fs");
+const { userInfoFetcher, totalCommitsFetcher } = require("./fetch");
 const { Octokit } = require("@octokit/rest");
+
+const countAllCommits = true;
 
 const octokit = new Octokit({
   auth: process.env.GH_ACCESS_TOKEN,
@@ -13,90 +16,32 @@ const octokit = new Octokit({
   },
 });
 
-async function grabDataFromAllRepositories() {
-  // Options under "List repositories for the authenticated user"
-  // https://octokit.github.io/rest.js/v18#authentication
-  const options = {
-    per_page: 100,
+async function getStats() {
+  const stats = {
+    name: '',
+    totalPRs: 0,
+    totalCommits: 0,
+    totalIssues: 0,
+    totalStars: 0,
+    contributedTo: 0,
   };
 
-  // https://docs.github.com/en/rest/reference/repos#list-repositories-for-the-authenticated-user
-  const request = await octokit.request('GET /user/repos', options);
-  return request.data;
-}
+  const user = await userInfoFetcher(process.env.GH_ACCESS_TOKEN).then((res) => res.data.data.viewer);
 
-function calculateTotalStars(data) {
-  const stars = data.map((repo) => repo.stargazers_count);
-  const totalStars = stars.reduce((sum, curr) => sum + curr, 0);
-  return totalStars;
-}
+  stats.name = user.name || user.login;
+  stats.totalPRs = user.pullRequests.totalCount;
+  stats.totalIssues = user.issues.totalCount;
+  stats.contributedTo = user.repositoriesContributedTo.totalCount;
+  stats.totalStars = user.repositories.nodes.reduce((prev, curr) => {
+    return prev + curr.stargazers.totalCount;
+  }, 0);
 
-async function calculateTotalCommits(data, cutoffDate) {
-  const contributorsRequests = [];
-  const githubUsername = process.env.GH_USERNAME;
+  stats.totalCommits = user.contributionsCollection.totalCommitContributions;
+  if (countAllCommits) {
+    stats.totalCommits = await totalCommitsFetcher(user.login, process.env.GH_ACCESS_TOKEN);
+  }
 
-  data.forEach((repo) => {
-    const options = {
-      owner: githubUsername,
-      repo: repo.name,
-    };
-
-    const lastRepoUpdate = new Date(repo.updated_at);
-
-    if (!cutoffDate || lastRepoUpdate > cutoffDate) {
-      // https://docs.github.com/en/rest/reference/repos#get-all-contributor-commit-activity
-      const repoStats = octokit.rest.repos.getContributorsStats(options);
-
-      contributorsRequests.push(repoStats);
-    }
-  });
-
-  const totalCommits = await getTotalCommits(
-    contributorsRequests,
-    githubUsername,
-    cutoffDate
-  );
-
-  return totalCommits;
-}
-
-async function getTotalCommits(requests, contributor, cutoffDate) {
-  const repos = await Promise.all(requests);
-  let totalCommits = 0;
-
-  repos.forEach((repo) => {
-    const contributorName = (item) => item.author.login === contributor;
-    const indexOfContributor = repo.data.findIndex(contributorName);
-
-    if (indexOfContributor !== -1) {
-      const contributorStats = repo.data[indexOfContributor];
-      totalCommits += !cutoffDate
-        ? computeCommitsFromStart(contributorStats)
-        : computeCommitsBeforeCutoff(contributorStats, cutoffDate);
-    }
-  });
-
-  return totalCommits;
-}
-
-function computeCommitsFromStart(contributorData) {
-  return contributorData.total;
-}
-
-function computeCommitsBeforeCutoff(contributorData, cutoffDate) {
-  const olderThanCutoffDate = (week) => {
-    // week.w -> Start of the week, given as a Unix timestamp (which is in seconds)
-    const MILLISECONDS_IN_A_SECOND = 1000;
-    const milliseconds = week.w * MILLISECONDS_IN_A_SECOND;
-    const startOfWeek = new Date(milliseconds);
-    return startOfWeek > cutoffDate;
-  };
-
-  const newestWeeks = contributorData.weeks.filter(olderThanCutoffDate);
-  // week.c -> Number of commits in a week
-  const total = newestWeeks.reduce((sum, week) => sum + week.c, 0);
-
-  return total;
+  return stats;
 }
 
 async function updateReadme(userData) {
@@ -112,17 +57,12 @@ async function updateReadme(userData) {
 }
 
 async function main() {
-  const repoData = await grabDataFromAllRepositories();
+  const repoData = await getStats();
 
-  const totalStars = calculateTotalStars(repoData);
-
+  const totalStars = repoData.totalStars;
   const lastYear = new Date();
   lastYear.setFullYear(lastYear.getFullYear() - 1);
-
-  const totalCommitsInPastYear = await calculateTotalCommits(
-    repoData,
-    lastYear
-  );
+  const totalCommitsInPastYear = repoData.totalCommits;
 
   // Hex color codes for the color blocks
   const colors = ["474342", "fbedf6", "c9594d", "f8b9b2", "ae9c9d"];
