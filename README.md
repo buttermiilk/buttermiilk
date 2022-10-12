@@ -15,11 +15,10 @@ Frameworks: Express.js
 Languages: Node.js, CPP, Bash
 Learning: Python, Rust
 Hobbies: Leaning, Cooking, Gaming
-Commits: 186
+Commits: 187
 Stars: 1
 Discord: Akira#8853
 ```
 <p align="left">
-  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
   <img alt="scheme" src="https://i.imgur.com/T09wbom.jpg" height="20" />
 </p>
