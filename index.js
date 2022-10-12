@@ -59,12 +59,12 @@ async function updateReadme(userData) {
 async function main() {
   const repoData = await getStats();
 
+  const totalIssues = repoData.totalIssues;
+  const contributedTo = repoData.contributedTo;
   const totalStars = repoData.totalStars;
-  const lastYear = new Date();
-  lastYear.setFullYear(lastYear.getFullYear() - 1);
   const totalCommitsInPastYear = repoData.totalCommits;
 
-  await updateReadme({ totalStars, totalCommitsInPastYear });
+  await updateReadme({ totalIssues, contributedTo, totalStars, totalCommitsInPastYear });
 }
 
 main();
