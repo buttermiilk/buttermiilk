@@ -10,7 +10,7 @@ buttermiilk@github
 OS: Windows 11, Ubuntu WSL
 Shell: Powershell
 Languages: Node.js, CPP, Bash
-Commits: 122
+Commits: 120
 Issues Opened: 7
 Contributed to: 4 repositories
 Stars: 1
