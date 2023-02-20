@@ -2,7 +2,7 @@
 > neofetch
 ```
 
-<img align="left" src="https://a.ppy.sh/16039831" alt="Profile picture" width="320" /> 
+<img align="left" src="https://i.imgur.com/Qq3OJJ0.png" alt="Profile picture" width="320" /> 
 
 ```csharp
 buttermiilk@github
@@ -10,7 +10,7 @@ buttermiilk@github
 OS: Windows 10, Debian "bullseye"
 Shell: PowerShell, zsh
 Languages: Node.js, CPP, Bash
-Commits: 131
+Commits: 133
 Issues Opened: 7
 Contributed to: 3 repositories
 Stars: 1
