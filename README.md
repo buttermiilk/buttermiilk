@@ -10,7 +10,7 @@ buttermiilk@github
 OS: Windows 10, Debian "bullseye"
 Shell: PowerShell, zsh
 Languages: Node.js, CPP, Bash
-Commits: 134
+Commits: 112
 Issues Opened: 7
 Contributed to: 3 repositories
 Stars: 1
