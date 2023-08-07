@@ -12,7 +12,7 @@ Shell: PowerShell, zsh
 Languages: Node.js, CPP, Bash
 Commits: 161
 Issues Opened: 7
-Contributed to: 4 repositories
+Contributed to: 3 repositories
 Stars: 1
 ```
 <p align="center">
