@@ -13,7 +13,7 @@ Languages: Node.js, CPP, Bash
 Commits: 233
 Issues Opened: 8
 Contributed to: 6 repositories
-Stars: 1
+Stars: 2
 ```
 <p align="center">
   <img alt="scheme" src="https://i.imgur.com/T09wbom.jpg" height="20" />
