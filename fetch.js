@@ -41,7 +41,6 @@ const userInfoFetcher = (token) => {
   });
 };
 
-// Experimental API
 const totalCommitsFetcher = async (login, token) => {
   return axios({
     method: 'get',
