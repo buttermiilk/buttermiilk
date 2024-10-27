@@ -7,13 +7,15 @@
 ```csharp
 buttermiilk@github
 -------------------------
-OS: Windows 10, Debian "bullseye"
+OS: Windows 10 // Arch Linux x86_64 // Debian "bullseye"
 Shell: PowerShell, zsh
-Languages: Node.js, CPP, Bash
-Commits: 233
-Issues Opened: 8
-Contributed to: 6 repositories
-Stars: 2
+Pronouns: they/them
+Location: Asia
+Languages: JavaScript, Python, C++, Bash, HTML, CSS
+Learning: Bun, React
+Commits: 0
+Stars: 0
+Custom URL: https://linktr.ee/sh1m3ji
 ```
 <p align="center">
   <img alt="scheme" src="https://i.imgur.com/T09wbom.jpg" height="20" />
