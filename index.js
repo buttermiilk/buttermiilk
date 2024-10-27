@@ -53,7 +53,7 @@ async function updateReadme(userData) {
 }
 
 async function main() {
-  const repoData = await getGithubStats();
+  const repoData = await getGithubStats(process.env.GH_USERNAME);
   const totalStars = repoData.totalStars;
   const totalCommitsInPastYear = repoData.totalCommits;
 

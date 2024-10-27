@@ -42,6 +42,7 @@ jobs:
         run: npm start
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_USERNAME: ${{ secrets.GH_USERNAME }}
 
       - name: Commit and Push new README.md to the repository
         uses: mikeal/publish-to-github-action@master
