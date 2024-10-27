@@ -36,7 +36,7 @@ async function calculateTotalCommits(data, cutoffDate) {
   const githubUsername = process.env.GH_USERNAME;
 
   data.forEach((repo) => {
-    console.log(repo.owner.type);
+    console.log(repo.owner);
     if (repo.owner.type === "Organization") return;
 
     const options = {
