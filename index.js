@@ -67,11 +67,6 @@ async function getTotalCommits(requests, contributor, cutoffDate) {
   let totalCommits = 0;
 
   repos.forEach((repo) => {
-    // Skip organization repos
-    if (repo.data.length === 0 || repo.data[0].author.type === "Organization") {
-      return;
-    }
-
     const contributorName = (item) => item.author.login === contributor;
     const indexOfContributor = repo.data.findIndex(contributorName);
 
