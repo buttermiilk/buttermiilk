@@ -1,5 +1,5 @@
 {
-  "name": "Buttermiilk",
+  "name": "buttermiilk",
   "version": "0.0.1",
   "description": "A profile README that kind of looks like a neofetch. Credits to AnOrdinaryUsername.",
   "main": "index.js",
@@ -14,14 +14,10 @@
   },
   "author": "AnOrdinaryUsername",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/AnOrdinaryUsername/AnOrdinaryUsername/issues"
-  },
-  "homepage": "https://github.com/AnOrdinaryUsername/AnOrdinaryUsername#readme",
   "dependencies": {
-    "@octokit/rest": "^18.5.5",
-    "axios": "^1.1.2",
-    "dotenv": "^10.0.0",
+    "@octokit/rest": "^18.12.0",
+    "axios": "^1.4.0",
+    "dotenv": "^16.0.3",
     "mustache": "^4.2.0"
   },
   "devDependencies": {
