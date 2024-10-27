@@ -71,8 +71,8 @@ async function getTotalCommits(requests, contributor, cutoffDate) {
     if (indexOfContributor !== -1) {
       const contributorStats = repo.data[indexOfContributor];
       totalCommits += !cutoffDate
-        ? computeCommitsFromStart(contributorStats)
-        : computeCommitsBeforeCutoff(contributorStats, cutoffDate);
+        ? computeCommitsFromStart(contributorStats).catch(() => {})
+        : computeCommitsBeforeCutoff(contributorStats, cutoffDate).catch(() => {});
     }
   });
 
