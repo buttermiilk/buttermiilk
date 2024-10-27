@@ -65,8 +65,8 @@ async function getTotalCommits(requests, contributor, cutoffDate) {
   let totalCommits = 0;
 
   repos.forEach((repo) => {
-    // Ignore organization repos
-    if (repo.data.owner.type === "Organization") {
+    // Skip organization repos
+    if (repo.data.length === 0 || repo.data[0].author.type === "Organization") {
       return;
     }
 
@@ -76,8 +76,8 @@ async function getTotalCommits(requests, contributor, cutoffDate) {
     if (indexOfContributor !== -1) {
       const contributorStats = repo.data[indexOfContributor];
       totalCommits += !cutoffDate
-        ? computeCommitsFromStart(contributorStats).catch(() => {})
-        : computeCommitsBeforeCutoff(contributorStats, cutoffDate).catch(() => {});
+        ? computeCommitsFromStart(contributorStats)
+        : computeCommitsBeforeCutoff(contributorStats, cutoffDate);
     }
   });
 
