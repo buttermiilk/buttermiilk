@@ -11,7 +11,6 @@ async function getGithubStats(username) {
   };
 
   try {
-    // Fetch all public repositories of the user.
     const reposResponse = await fetch(`https://api.github.com/users/${username}/repos?per_page=100`, { headers });
     const repos = await reposResponse.json();
 
@@ -40,13 +39,6 @@ async function getGithubStats(username) {
     return { totalStars: 0, totalCommits: 0 };
   }
 }
-
-// Example usage in GitHub Action:
-getGithubStats('octocat').then(stats => {
-  console.log(`Total Stars: ${stats.totalStars}`);
-  console.log(`Total Commits (Past Year): ${stats.totalCommits}`);
-});
-
 
 async function updateReadme(userData) {
   const TEMPLATE_PATH = "./main.mustache";
