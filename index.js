@@ -7,7 +7,7 @@ const { Octokit } = require("@octokit/rest");
 const countAllCommits = true;
 
 const octokit = new Octokit({
-  auth: process.env.GITHUB_TOKEN,
+  auth: process.env.GH_ACTION_TOKEN,
   userAgent: "readme v1.0.0",
   baseUrl: "https://api.github.com",
   log: {
@@ -26,7 +26,7 @@ async function getStats() {
     contributedTo: 0,
   };
 
-  const user = await userInfoFetcher(process.env.GITHUB_TOKEN).then((res) => res.data.data.viewer);
+  const user = await userInfoFetcher(process.env.GH_ACTION_TOKEN).then((res) => res.data.data.viewer);
 
   stats.name = user.name || user.login;
   stats.totalPRs = user.pullRequests.totalCount;
@@ -38,7 +38,7 @@ async function getStats() {
 
   stats.totalCommits = user.contributionsCollection.totalCommitContributions;
   if (countAllCommits) {
-    stats.totalCommits = await totalCommitsFetcher(user.login, process.env.GITHUB_TOKEN);
+    stats.totalCommits = await totalCommitsFetcher(user.login, process.env.GH_ACTION_TOKEN);
   }
 
   return stats;

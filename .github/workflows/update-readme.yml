@@ -41,10 +41,9 @@ jobs:
       - name: Generate updated README file
         run: npm start
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GH_USERNAME: ${{ github.actor }}
+          GH_ACTION_TOKEN: ${{ secrets.GH_ACTION_TOKEN }}
 
       - name: Commit and Push new README.md to the repository
         uses: mikeal/publish-to-github-action@master
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_ACTION_TOKEN: ${{ secrets.GH_ACTION_TOKEN }}
