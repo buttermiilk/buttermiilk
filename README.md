@@ -13,7 +13,7 @@ Pronouns: they/them
 Location: Asia
 Languages: JavaScript, Python, C++, Bash, HTML, CSS
 Learning: Bun, React
-Commits: 76
+Commits: 77
 Stars: 2
 Custom URL: "https://linktr.ee/sh1m3ji"
 ```
