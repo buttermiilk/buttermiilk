@@ -3,14 +3,13 @@ name: Build README
 on:
   workflow_dispatch:
     inputs:
-      logLevel:
-        description: 'e'     
-        required: true
-        default: 'warning'
-      tags:
-        description: 'Test stuff'
+      reason:
+        description: 'Reason for manual trigger'
+        required: false
+        default: 'Manual update of README'
   push:
     branches:
+      - main
       - master
   schedule:
     - cron: '0 7-23/2 * * *'
@@ -18,25 +17,21 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       # Checkout project source code
-      - uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-      - name: Use NodeJs 18.x
-        uses: actions/setup-node@v1
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          node-version: "18.x"
-
-      - name: Cache npm dependencies
-        uses: actions/cache@v2
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
+          node-version: 20
+          cache: 'npm'
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci || npm install
 
       - name: Generate updated README file
         run: npm start
@@ -44,7 +39,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_USERNAME: ${{ secrets.GH_USERNAME }}
 
-      - name: Commit and Push new README.md to the repository
-        uses: mikeal/publish-to-github-action@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Commit and Push new README.md
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: 'docs: update README stats'
+          file_pattern: 'README.md'
