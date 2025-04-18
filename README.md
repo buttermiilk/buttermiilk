@@ -7,13 +7,13 @@
 ```csharp
 buttermiilk@github
 -------------------------
-OS: Windows 10, Arch Linux x86_64, Debian "bullseye"
-Shell: PowerShell, zsh
+OS: Windows 10, Arch Linux x86_64
+Shell: zsh, PowerShell
 Pronouns: they/them
 Location: Asia
-Languages: JavaScript, Python, C++, Bash, HTML, CSS
-Learning: Bun, React
-Commits: 162
+Languages: TypeScript, JavaScript, Python, C++, Bash
+Learning: Bun, React, Next.js, Frontend Design
+Commits: 164
 Stars: 2
 Custom URL: "https://linktr.ee/sh1m3ji"
 ```
